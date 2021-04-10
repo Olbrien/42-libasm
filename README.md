@@ -1,3 +1,5 @@
+<pre>
+
 ------------------------------------------------------------------------------------
 			nasm -f elf64 hello.asm && ld hello.o && ./a.out
 
@@ -189,3 +191,5 @@ $ - Current label location.
 
 
 https://www.youtube.com/watch?v=8rncBCVySEw
+
+</pre>
