@@ -34,7 +34,13 @@ then
 	echo "Debugger Mode!"
 	echo ""
 	echo "Step 1: Making sure you didn't leave a mess... I told you to clean."
-	bash clean.sh
+	rm -f -r tester_linux
+	rm -f -r tester_mac
+	cd srcs_linux
+	make fclean
+	cd ../srcs_mac
+	make fclean
+	cd ..
 	echo "Step 2: 'make' on ./srcs_linux/Makefile"
 	cd srcs_linux
 	make re
