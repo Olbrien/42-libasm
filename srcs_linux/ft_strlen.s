@@ -7,17 +7,18 @@ ft_strlen:
 		mov rbp,rsp
 
 		mov rax, 0
-		call _compare
+		jmp _compare
 _compare:
 		cmp BYTE[rdi+rax], 0
-		jle _exit
+		jle _return
+
 		inc rax
-		call _compare
-_exit:
+		jmp _compare
+_return:
 		mov rsp,rbp
 		pop rbp
 
 		ret
 
-
-; size_t strlen(const char *s)
+;size_t strlen(const char *s)
+;rdi = const char *s
