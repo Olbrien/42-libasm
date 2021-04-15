@@ -8,7 +8,7 @@ ft_strcpy:
 
 		mov rax, 0	; RAX is where you going to put your Destination for returning.
 		mov rcx, 0	; RCX (CL is least significant byte). You going to use CL instead
-					; of RCX. Because you want to copy 1 byte (1 char) at a time.
+				; of RCX. Because you want to copy 1 byte (1 char) at a time.
 		mov rdx, 0	; RDX is going to be the counter.
 		jmp _copy
 _copy:
