@@ -37,7 +37,7 @@ void ft_test_strcmp()
 		strcpy(string2, "");
 
 	printf("- strcmp:	%d\n", strcmp(string1, string2));
-	//printf("- ft_strcmp:	%d", ft_strcmp(dest1, src1));
+	printf("- ft_strcmp:	%d", ft_strcmp(string1, string2));
 
 	ft_test_strcmp();
 }

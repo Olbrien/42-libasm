@@ -54,6 +54,7 @@ then
 	cp ../main/libasm.h .
 	cp ../srcs_linux/ft_strlen.s .
 	cp ../srcs_linux/ft_strcpy.s .
+	cp ../srcs_linux/ft_strcmp.s .
 	echo "Step 5: Compiling main.c with libasm.a to form an executable file."
 	gcc -Wall -Wextra -Werror main.c libasm.a -o linux_debugger
 	echo "Step 6: Running the executable file called linux_debugger."
