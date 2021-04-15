@@ -13,23 +13,23 @@ ft_strcpy:
 		jmp _copy
 _copy:
 		mov cl, BYTE[rsi + rdx]	; RSI is the Destination, RDX is the counter.
-								; You're going to move BYTE[RSI + RDX] or the first char
-								; of [RSI + RDX] to the least significant byte of RCX
-								; which is CL.
+					; You're going to move BYTE[RSI + RDX] or the first char
+					; of [RSI + RDX] to the least significant byte of RCX
+					; which is CL.
 
 		mov BYTE[rdi + rdx], cl ; Now you're moving the byte you just got to [RDI + RDX].
-								; Meaning, you're basically doing "dest[0] = src[0]".
+					; Meaning, you're basically doing "dest[0] = src[0]".
 
 		cmp BYTE[rsi + rdx], 0	; If the Source + RDX is '\0'.
 		jz _return
-		inc rdx					; Increase counter.
+		inc rdx			; Increase counter.
 		jmp _copy
 _return:
 		mov rsp,rbp	; Function Epilogue
 		pop rbp		; Function Epilogue
 
 		mov rax, rdi ; Copying the Temporary String you made from bytes of CL
-					 ; to the Return Register.
+			     ; to the Return Register.
 		ret
 
 ;char *strcpy(char *dest, const char *src)
