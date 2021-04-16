@@ -61,6 +61,7 @@ then
 	cp ../srcs_linux/ft_strcmp.s .
 	cp ../srcs_linux/ft_write.s .
 	cp ../srcs_linux/ft_read.s .
+	cp ../srcs_linux/ft_strdup.s .
 	echo "Step 5: Compiling main.c with libasm.a to form an executable file."
 	gcc -Wall -Wextra -Werror main.c libasm.a -o linux_debugger -no-pie
 	echo "Step 6: Running the executable file called linux_debugger."

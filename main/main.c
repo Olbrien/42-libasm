@@ -1,6 +1,59 @@
 #include "libasm.h"
 
 
+void ft_test_strdup()
+{
+	char *strdup1;
+	char *strdup2;
+
+	char string[350];
+
+	printf("\n\nType the string you want to strdup: ");
+	scanf("\n%[^\n]", string);
+
+	if (strcmp(string, "QUIT") == 0)
+	{
+		announcement("QUIT");
+		exit(0);
+	}
+	if (strcmp(string, "BACK") == 0)
+	{
+		announcement("FT_READ");
+		ft_test_read();
+		return ;
+	}
+	if (strcmp(string, "NEXT") == 0)
+	{
+		printf("\nThere is no next! This is the last test. \nPay attention please...");
+		ft_test_strdup();
+		return ;
+	}
+	if (strcmp(string, "EMPTY") == 0)
+	{
+		strdup1 = strdup("");
+		strdup2 = ft_strdup("");
+
+		printf("- strdup: %s", strdup1);
+		printf("\n- ft_strdup: %s", strdup2);
+
+		free(strdup1);
+		free(strdup2);
+
+		ft_test_strdup();
+	}
+
+	strdup1 = strdup(string);
+	strdup2 = ft_strdup(string);
+
+	printf("- strdup: %s", strdup1);
+	printf("\n- ft_strdup: %s", strdup2);
+
+	free(strdup1);
+	free(strdup2);
+
+	ft_test_strdup();
+}
+
 void ft_test_read()
 {
 	int fd3;
@@ -32,13 +85,13 @@ void ft_test_read()
 		ft_test_write();
 		return ;
 	}
-	/*if (strcmp(text, "NEXT") == 0)
+	if (strcmp(text, "NEXT") == 0)
 	{
 		printf("\n");
 		announcement("FT_STRDUP");
 		ft_test_strdup();
 		return ;
-	}*/
+	}
 
 	int ret1 = read(fd3, buf, count);
 	if (ret1 < 0)
@@ -307,6 +360,12 @@ void announcement(char *texto)
 		printf("\n		*	FT_READ		*\n");
 		printf("		*************************");
 	}
+	if (strcmp(texto, "FT_STRDUP") == 0)
+	{
+		printf("		*************************");
+		printf("\n		*	FT_STRDUP	*\n");
+		printf("		*************************");
+	}
 	if (strcmp(texto, "QUIT") == 0)
 	{
 		printf("\nDon't forget to 'bash clean.sh' to clean the mess.\n");
@@ -321,10 +380,12 @@ int main()
 	open("texto1.txt", O_RDONLY);
 	open("texto2.txt", O_RDONLY);
 
-	announcement("START");
+	//announcement("START");
 
-	announcement("FT_STRLEN");
-	ft_test_strlen();
+	//announcement("FT_STRLEN");
+	//ft_test_strlen();
+
+	ft_test_strdup();
 
 	return (0);
 }
