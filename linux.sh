@@ -24,8 +24,10 @@ then
 	cp ../srcs_linux/libasm.a .
 	cp ../main/main.c .
 	cp ../main/libasm.h .
+	cp ../main/texto1.txt .
+	cp ../main/texto2.txt .
 	echo "Step 5: Compiling main.c with libasm.a to form an executable file."
-	gcc -Wall -Wextra -Werror main.c libasm.a -o linux_normal
+	gcc -Wall -Wextra -Werror main.c libasm.a -o linux_normal -no-pie
 	echo "Step 6: Running the executable file called linux_normal."
 	./linux_normal
 elif [[ "$INDEX" == "debugger" ]];
@@ -52,11 +54,15 @@ then
 	cp ../srcs_linux/libasm.a .
 	cp ../main/main.c .
 	cp ../main/libasm.h .
+	cp ../main/texto1.txt .
+	cp ../main/texto2.txt .
 	cp ../srcs_linux/ft_strlen.s .
 	cp ../srcs_linux/ft_strcpy.s .
 	cp ../srcs_linux/ft_strcmp.s .
+	cp ../srcs_linux/ft_write.s .
+	cp ../srcs_linux/ft_read.s .
 	echo "Step 5: Compiling main.c with libasm.a to form an executable file."
-	gcc -Wall -Wextra -Werror main.c libasm.a -o linux_debugger
+	gcc -Wall -Wextra -Werror main.c libasm.a -o linux_debugger -no-pie
 	echo "Step 6: Running the executable file called linux_debugger."
 	ddd ./linux_debugger
 else

@@ -1,6 +1,138 @@
 #include "libasm.h"
 
 
+void ft_test_read()
+{
+	int fd3;
+
+	char buf[350];
+	char buf2[350];
+	char text[350];
+	int count;
+
+	printf("\n\nType the requirements to open.\n");
+	printf("File Descriptor: 3 (texto1.txt / texto2.txt): ");
+	scanf("%d", &fd3);
+	printf("Text (Random text. For NEXT, QUIT, etc...): ");
+	scanf("\n%[^\n]", text);
+	printf("Count: ");
+	scanf("%d", &count);
+
+	if (fd3 > 3)
+		fd3++;
+
+	if (strcmp(text, "QUIT") == 0)
+	{
+		announcement("QUIT");
+		exit(0);
+	}
+	if (strcmp(text, "BACK") == 0)
+	{
+		announcement("FT_WRITE");
+		ft_test_write();
+		return ;
+	}
+	/*if (strcmp(text, "NEXT") == 0)
+	{
+		printf("\n");
+		announcement("FT_STRDUP");
+		ft_test_strdup();
+		return ;
+	}*/
+
+	int ret1 = read(fd3, buf, count);
+	if (ret1 < 0)
+	{
+		printf("- return read: %d\n", ret1);
+		printf("- read errno / msg: %i - %s\n", errno, strerror(errno));
+		errno = 0;
+	}
+	int ret2 = ft_read(fd3+1, buf2, count);
+	if (ret2 < 0)
+	{
+		printf("- return ft_read: %d\n", ret1);
+		printf("- ft_read errno / msg: %i - %s\n", errno, strerror(errno));
+		ft_test_read();
+	}
+
+	printf("- return read: %d\n", ret1);
+	printf("- return ft_read: %d\n", ret2);
+
+
+	buf[count] = '\0';
+	buf2[count] = '\0';
+	printf("- return buffer of read: %s\n", buf);
+	printf("- return buffer of ft_read: %s\n", buf2);
+
+	ft_test_read();
+}
+
+void ft_test_write()
+{
+	int fd;
+	char buf[350];
+	int count;
+
+	printf("\n\nType the requirements to write.\n");
+	printf("File Descriptor: 0 (SI), 1 (SO), 2 (SE): ");
+	scanf("%d", &fd);
+	printf("Buffer: ");
+	scanf("\n%[^\n]", buf);
+	printf("Count: ");
+	scanf("%d", &count);
+
+	if (strcmp(buf, "QUIT") == 0)
+	{
+		announcement("QUIT");
+		exit(0);
+	}
+	if (strcmp(buf, "BACK") == 0)
+	{
+		announcement("FT_STRCMP");
+		ft_test_strcmp();
+		return ;
+	}
+	if (strcmp(buf, "NEXT") == 0)
+	{
+		printf("\n");
+		announcement("FT_READ");
+		ft_test_read();
+		return ;
+	}
+	if (strcmp(buf, "EMPTY") == 0)
+		strcpy(buf, "");
+
+	write(1, "- write: ", 10);
+	errno = 0;
+	int ret1 = write(fd, buf, count);
+	if (ret1 < 0)
+	{
+		write(1, "\n- return write: -1\n", 21);
+		write(1, "- write errno / msg: ", 22);
+		write(1, ft_itoa(errno), ft_strlen(ft_itoa(errno)));
+		write(1, " - ", 4);
+		write(1, strerror(errno), strlen(strerror(errno)));
+		errno = 0;
+	}
+	write(1, "\n- ft_write: ", 13);
+	int ret2 = ft_write(fd, buf, count);
+	if (ret2 < 0)
+	{
+		write(1, "\n- return ft_write: -1\n", 24);
+		write(1, "- ft_write errno / msg: ", 25);
+		write(1, ft_itoa(errno), ft_strlen(ft_itoa(errno)));
+		write(1, " - ", 4);
+		write(1, strerror(errno), strlen(strerror(errno)));
+		errno = 0;
+		ft_test_write();
+	}
+
+	printf("\n- return write: %d\n", ret1);
+	printf("- return ft_write: %d", ret2);
+
+	ft_test_write();
+}
+
 void ft_test_strcmp()
 {
 	char string1[350];
@@ -24,13 +156,13 @@ void ft_test_strcmp()
 		ft_test_strcpy();
 		return ;
 	}
-	/*if (strcmp(string1, "NEXT") == 0 || strcmp(string2, "NEXT") == 0)
+	if (strcmp(string1, "NEXT") == 0 || strcmp(string2, "NEXT") == 0)
 	{
 		printf("\n");
 		announcement("FT_WRITE");
 		ft_test_write();
 		return ;
-	}*/
+	}
 	if (strcmp(string1, "EMPTY") == 0)
 		strcpy(string1, "");
 	if (strcmp(string2, "EMPTY") == 0)
@@ -163,6 +295,18 @@ void announcement(char *texto)
 		printf("\n		*	FT_STRCMP	*\n");
 		printf("		*************************");
 	}
+	if (strcmp(texto, "FT_WRITE") == 0)
+	{
+		printf("		*************************");
+		printf("\n		*	FT_WRITE	*\n");
+		printf("		*************************");
+	}
+	if (strcmp(texto, "FT_READ") == 0)
+	{
+		printf("		*************************");
+		printf("\n		*	FT_READ		*\n");
+		printf("		*************************");
+	}
 	if (strcmp(texto, "QUIT") == 0)
 	{
 		printf("\nDon't forget to 'bash clean.sh' to clean the mess.\n");
@@ -174,6 +318,9 @@ void announcement(char *texto)
 
 int main()
 {
+	open("texto1.txt", O_RDONLY);
+	open("texto2.txt", O_RDONLY);
+
 	announcement("START");
 
 	announcement("FT_STRLEN");
