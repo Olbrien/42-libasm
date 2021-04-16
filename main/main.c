@@ -380,12 +380,10 @@ int main()
 	open("texto1.txt", O_RDONLY);
 	open("texto2.txt", O_RDONLY);
 
-	//announcement("START");
+	announcement("START");
 
-	//announcement("FT_STRLEN");
-	//ft_test_strlen();
-
-	ft_test_strdup();
+	announcement("FT_STRLEN");
+	ft_test_strlen();
 
 	return (0);
 }
