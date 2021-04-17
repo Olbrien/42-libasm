@@ -63,7 +63,7 @@ then
 	cp ../srcs_mac/ft_read.s .
 	cp ../srcs_mac/ft_strdup.s .
 	echo "Step 5: Compiling main.c with libasm.a to form an executable file."
-	gcc -Wall -Wextra -Werror main.c libasm.a -o mac_debugger -no-pie
+	gcc -Wall -Wextra -Werror main.c libasm.a -o mac_debugger
 	echo "Step 6: Running the executable file called mac_debugger."
 	ddd ./mac_debugger
 else
