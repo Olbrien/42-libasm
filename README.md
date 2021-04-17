@@ -1,40 +1,100 @@
+# ft_libasm
+
+###### <i>Recent Update on 17/04/2021.</i>
+Finished the project.\
+Waiting to be evaluated.
+
+###### <i>Old Update on 07/04/2021.</i>
+Started the project.
+
+**** Run This Project ****
+
+<pre>
+First download the repository. 
+
+On the root of the folder depending in what machine you are type
+`bash linux.sh`
+`bash mac.sh`
+
+You need to have DDD and NASM installed.
+</pre>
+
+![GitHub Logo](/extras/images/image2.png)
+
+**** Info ****
+
+Assembly is a pretty difficult language to grasp. It will take you a few days to start to make sense to you.
+
+I've watched a few youtube videos but what really started to click to me was a .PDF called 
+"Beginning x64 Assembly Programming From Novice to AVX Professional".
+
+You can find this .PDF online. It has 458 pages but don't worry.
+For this project you only need to read to the page 112. 
+This .PDF explains everything better than any video on youtube. It has many examples.
+
+I explain everything I did in detail on the folder "code_explained". 
+Make you sure you follow along with the order of the subject.
+ft_strlen (man 3 strlen)
+ft_strcpy (man 3 strcpy)
+ft_strcmp (man 3 strcmp)
+ft_write (man 2 write)
+ft_read (man 2 read)
+ft_strdup (man 3 strdup)
+
+One thing really important, and if you're reading the .PDF, don't ignore the DDD section.
+Using DDD makes you visually see what you are really doing. And that was what made it click for me.
+Really simple to use and very useful.
+
+Here are some useful links:
+
+[Linux System Call Table for x86_64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
+[macOS System Call Table for x86_64](https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master/)
+
+[Registers](https://miro.medium.com/max/575/1*4ipwUzIWd4eqUvcEmZ5tMQ.png)
+
+[errno return values](https://docs.freebsd.org/en_US.ISO8859-1/books/developers-handbook/x86-return-values.html)
+[errno Linux](https://cpip.readthedocs.io/en/latest/_static/dictobject.c/errno.h_85b9b44751f37eef65e30f1b57e3f0fb.html)
+[errno macOS](https://unix.superglobalmegacorp.com/Net2/newsrc/sys/errno.h.html)
+
+Here are some useful stuff I picked up:
+
 <pre>
 ------------------------------------------------------------------------------------
-			nasm -f elf64 hello.asm && ld hello.o && ./a.out
-
-Para ver qual o processador que tens que usar é "nasm -hf".
-Nasm transforma o ficheiro em binário .o e o ld (linkage editor ou binder)
-transforma o ficheiro .o em ficheiro executável.
-Adicionar -g para debug:
-
 			nasm -f elf64 -g hello.asm && ld hello.o && ./a.out
+
+To see what your processor is type "nasm -hf"
+NASM makes the file into binary (.o) and ld is the linkage that makes the 
+.o file in an executable file.
+
+-g flag is for debug.
+
 ------------------------------------------------------------------------------------
 
-			objdump -D -M intel hello.o		(D grande = com a section .data)
-			objdump -d -M intel hello.o		(d pequeno = menos a section .data)
+			objdump -D -M intel hello.o	(D = with sections .data .bss .text)
+			objdump -d -M intel hello.o	(d = without sections)
 
-Basicamente isto mostra o que é que o processador percebe com
-os comandos que fazes e as bytes e bits utilizadas. Instruções etc...
+This command shows how the bytes and bits are used, how instructions are used, registers,
+etc...
+
 ------------------------------------------------------------------------------------
 
 			system_profiler SPHardwareDataType   (Mac)
-			lscpu				      (Linux)
+			lscpu				     (Linux)
 
+Each processor (Intel, ARM, MIPS) has their syntax. You can't use the same code in a 
+different processor.
 
-Cada processador (Intel, ARM, MIPS) tem o seu código (syntax). Não consegues usar o mesmo
-código em ARM.
-Processadores Intel i3, i5... têm arquitectura de X86_64 . Funciona tanto 64bits
-como 32bits.
 ------------------------------------------------------------------------------------
 
 			cat /usr/include/x86_64-Linux-gnu/asm/unistd_64.h (Linux)
 
-Isto são as funções do system call.
-Mais detalhadas neste site em baixo.
+These are the functions of system call (syscall).
+In more detail on the website below.
 
 https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
 
-Para chamar system calls, chamas "syscall".
+To use system calls, you call them with syscall.
+
 ------------------------------------------------------------------------------------
 
 Structure of an Assembly Program
@@ -46,22 +106,21 @@ Structure of an Assembly Program
 
 section .data
 	<variable name> <type> <value>		(dinamicas)
-	<constant name> equ <value>			(statics)
+	<constant name> equ <value>		(statics)
 
-	Se forem dinamicas, o <type> é um dos seguintes.
-
+	If they are dynamics, the <type> is one of the followings.
+	
 	Type   Length    Name
-	db	   8 bits    Byte
+	db     8 bits    Byte
 	dw     16 bits   Word
 	dd     32 bits   Double word
 	dq     64 bits   Quadword
 
-		"exemplo db "Hello, World!!!!!",10"
+		"exemple: db "Hello, World!!!!!",10"
 
-	Statics não mudam. São assim até o fim do programa.
+	Statics don't change. They are set in the beggining of the program.
 
 		"pi equ 3.14541"
-
 
 section .bss
 	<variable name> <type> <number>
@@ -78,7 +137,6 @@ section .bss
 	will be assigned later at execution time. Memory places are not reserved at
 	compile time but at execution time.
 
-
 section .text
 
 	This section contains the program code and starts with the following:
@@ -89,12 +147,12 @@ section .text
 
 ------------------------------------------------------------------------------------
 
-Para usar system calls (exemplo write, exit, etc...)
-Tens que os chamar através de Registers.
+To use system calls (exemple write, exit, etc...)
+You have to set the Registers correctly.
 
 A ordem dos Registers são:
 
-rax		system call number		este também contem o return value rax.
+rax		system call number		This is the return value.
 rdi		1st argument
 rsi		2nd argument
 rdx		3rd argument
@@ -102,8 +160,8 @@ r10		4th argument
 r8		5th argument
 r9		6th argument
 
-Se quisesses chamar o write. Ou usas o link a baixo ou escreves "man 2 write"
-na consola. E retiras a informação. Terminas com syscall.
+If you want to call the write function. 
+You type "man 2 write" on the console and you take the bellow information out.
 
 ssize_t write (int fd, const void *buf, size_t count);
 	  . 	   .		  .		 .
@@ -111,7 +169,7 @@ ssize_t write (int fd, const void *buf, size_t count);
 	  |	   |		  |		 |
 	 rax      rdi		 rsi		rdx
 
-Exemplo:
+Exemple:
 		mov rax, 1
 		mov rdi, 1
 		mov rsi, texto
@@ -120,36 +178,38 @@ Exemplo:
 
 
 https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf
+
 ------------------------------------------------------------------------------------
 
 x86_64 registers
 https://miro.medium.com/max/575/1*4ipwUzIWd4eqUvcEmZ5tMQ.png
 
 
-	64bits			32bits		16bits	8bits(most significant byte of ax/
-													least significant byte of ax)
+	64bits		32bits	    16bits 8bits(ah = most significant byte of ax / al = least significant byte of ax)
+										
 	|rax		|eax	    |ax	   |
-	|-------64-----|-----32----|-----16------|
+	|-------64------|-----32----|-----16------|
 			|-----------|------|------|
 				    |---8--|--8---|
 				    |------|------|
 				    |ah    |al    |
 
-	Exemplo em hexadécimal, como mostrado no objdump.
+	Exemple in hexadecimal, shown in objdump.	
 
 	rax: 12 34 56 78 90 12 34 56		(8 bytes ou 64bits)
 	eax:		  90 12 34 56		(4 bytes ou 32bits)
 	ax:		 	34 56		(2 bytes ou 16bits)
 	ah:			34		(1 bytes ou 8bits)
 	al:			   56		(1 bytes ou 8bits)
+	
 ------------------------------------------------------------------------------------
 
 1 byte = 8 bits
 
-Quando fazes "objdump -D -M intel hello.o" aqueles "48 be 00 00"... cada grupo representa
-1 byte.
+When you do "objdump -D -M intel hello.o" those "48 be 00 00"... each group represents 1 byte.
+The instruction and the value each represent 1 byte.
 
-Tanto a instrução como o valor dado representam 1 byte cada. Exemplo em baixo
+Example:
 
 	_start:
 		mov rax, 1
@@ -158,8 +218,8 @@ Tanto a instrução como o valor dado representam 1 byte cada. Exemplo em baixo
 		mov rdx, 21
 		syscall
 
-Se montares isto para object file, .o e fizeres "objdump -D -M intel hello.o",
-ficas com isto.
+If you put this on a object file (.o) and do "objdump -D -M intel hello.o"
+you get this:
 
    0:   b8 01 00 00 00          mov    eax,0x1
    5:   bf 01 00 00 00          mov    edi,0x1
@@ -168,35 +228,38 @@ ficas com isto.
   14:   ba 15 00 00 00          mov    edx,0x15
   19:   0f 05                   syscall
 
-O teu compilador já optimiza um bocado, como podes ver, o teu "rax" passou para "eax".
-Passou de 64bits para 32bits.
+Your compiler already optimizes it a bit, as you can see, your "RAX" is now "EAX".
+Went from 64 bits to 32bits.
 
    0:   b8 01 00 00 00          mov    eax,0x1
 
-Isto quero dizer que 1 byte está a ser utilizadas e 3 delas estão nulas.
-O byte do b8 não faz parte, o b8 é o "eax". Os outros 4 bytes são o que representa o "eax".
+This means 1 byte is being used and 3 of them are null.
+The b8 byte is from "EAX". The other 4 bytes are what "EAX" represents.
 4bytes * 8bits = 32bits = eax.
-b8 é o eax.
-01 é o 0x1.
 
-Se fores a ver a tabela https://miro.medium.com/max/575/1*4ipwUzIWd4eqUvcEmZ5tMQ.png
-eax são 32bits, ou 4 * 8.
+b8 is EAX
+01 is 0x1.
+
+If you check the table https://miro.medium.com/max/575/1*4ipwUzIWd4eqUvcEmZ5tMQ.png
+EAX are 32 bits, or 4 * 8.
 Instruction codes https://www.cs.uaf.edu/2016/fall/cs301/lecture/09_28_machinecode.html
 
    0:  |b8||01 00 00 00|          mov    eax,0x1
 	 |  |\_________/
-	 \/      eax
+ 	\|/      eax
+	 
 	Instruction
 	code for eax
 
-Tens 3 bytes a não ser utilizadas e só estás a usar 1 byte.
-Se fores à tabela, 1 byte é o al ou ah. Tu queres o least significant byte, logo usas
-o al.
-E agora ficas com
+You have 3 bytes not being used. And 1 being used.
+If you're at the table, 1 byte is or al or ah. You want the least significant byte,
+therefor you use al.
+And now you get:
 
     0:   b0 01                   mov    al,0x1
 
-Optimizado.
+Optimized.
+
 ------------------------------------------------------------------------------------
 
 Data Types:
@@ -205,7 +268,8 @@ Byte 				8 bits
 Word 				16 bits
 Double Word			32 bits
 Quad Word			64 bits
-Double Quad Word	128 bits
+Double Quad Word		128 bits
+
 ------------------------------------------------------------------------------------
 
 Endianess:
@@ -218,39 +282,34 @@ Big Endian     byte7   byte6   byte3   byte4   byte3   byte2   byte1   byte0
 
 x86 e x86_64 usam o Little Endian.
 
-Exemplo:
+Exemple:
 
 	int i = 0x01234567;
 
 	Little Endian:		67 45 23 01
 	   Big Endian:		01 23 45 67
 
-É por isso quando fazes "objdump -d -M intel hello.o" e tens o valor de 1 num eax ou rax
-tens.
+This is why when you do "objdump -d -M intel hello.o" you have a value of 1 in the EAX.
 
 	0:   b8 |01 00 00 00|          mov    eax,0x1
 		Little Endian
+		
 ------------------------------------------------------------------------------------
 
 Logic:
 
 	NOT
-
 		Converts every 0 into 1 and every 1 into 0.
 
 			A 	0 1	 A 	  = 11001011
 			NOT A 	1 0	 NOT A    = 00110100
-
 	OR
-
 		If there is a 1 in A or B or in both, the outcome is a 1.
 
 			A 	0 1 0 1	A 	= 11001011
 			B 	0 0 1 1	B 	= 00011000
 			A OR B  0 1 1 1	A OR B  = 11011011
-
 	XOR
-
 		Exclusive OR: If there is a 1 in A or B, the outcome is a 1. If A and B are
 		both 1 or 0, the outcome is 0.
 
@@ -265,25 +324,25 @@ Logic:
 			A	= 11001011
 			A 	= 11001011
 			A XOR A = 00000000
-
 	AND
-
 		If there is a 1 in A and in B, the outcome is a 1; otherwise, it’s 0.
 
 			A 	0 1 0 1	A 	= 11001011
 			B 	0 0 1 1	B 	= 00011000
 			A AND B 0 0 0 1	A AND B = 00001000
+			
 ------------------------------------------------------------------------------------
 
-sys_write: (1)   											rax
+sys_write: (1)   						rax
 
-	File Descriptor 			0 (Standard Input)					rdi
-						1 (Standard Output)
-						2 (Standard Error)
+	File Descriptor 	0 (Standard Input)		rdi
+				1 (Standard Output)
+				2 (Standard Error)
 
-	Buffer						Location of string				rsi
+	Buffer			Location of string		rsi
 
-	Count						Length of string				rdx
+	Count			Length of string		rdx
+	
 ------------------------------------------------------------------------------------
 
 Kernel:
@@ -313,9 +372,8 @@ On Ubuntu it's "cat /usr/include/x86_64-Linux-gnu/asm/unistd_64.h"
 
 C:
 
-Quando fazes um código C, aquilo traduz para Assembly e depois em assembly traduz a linguagem
-para linguagem binária .o, depois aquilo linka os .o com o .ld e depois é que forma o
-executável .out .
+When you code C, it translates to Assembly and then Assembly translates to Binary Language (.o).
+Then you link the .o with .ld and it forms a readable, executable file. Usually "a.out".
 
 ------------------------------------------------------------------------------------
 
@@ -324,42 +382,41 @@ Assembly:
 $ - Current label location.
 
 
-
 ------------------------------------------------------------------------------------
 
 GDB (Debugger)
 
-	Quando compilares o programa tens que compilar com -g para conseguires usar bem o
+	When you compile the program you have to compile with the flag -g so you can use
 	gdb.
-
 			nasm -f elf64 -g hello.asm && ld hello.o && ./a.out
 
-	Começas por correr o "gdb a.out".
+	You start by typing "gdb a.out"
 
-quit:	Fechar o gdb.
+quit:	Close gdb.
 
-list:	Mostra-te umas quantas linhas de código. Escreve list outra vez e mostra-te mais.
-	Podes fazer também list 1, list 11, list 5 etc etc...
+list:	This shows a few lines of code. Write list again it shows more.
+	You can also do list 1, list 11, list 5, etc etc...
 
-	Se vires o "gdb" com % e formato estranho provavelmente tens o gdb a correr num syntax
-	diferente do intel.
-	Para mudares para o syntax do intel fazes:
+	If you see gdb with "%" and in a weird format most likely you are running gdb on a different
+	syntax than Intel.
+	
+	To change it:
 
-set disassembly-flavor intel:	Muda o syntax para intel.
+set disassembly-flavor intel:	Changes the syntax to Intel.
 
-	Para mudar o disassembly-flavor para intel permanentemente. Crias um ficheiro chamado
-	".gdbinit" com "set disassembly-flavor intel" lá dentro e guardas dentro do "cd ~".
+	To change the syntax to intel permanently, make a file called "gdbinit" with 
+	"set disassembly-flavor intel" inside and save it on "cd ~".
 
+disassemble (frame):	It shows the memory addresses (0x000...), shows the bytes (<+0>, <+5>)
+			that are necessary and shows the instructions you did.
+			Probably it will say that you called an EAX when you really called a RAX.
+			But that's the assembly optimizing.
 
-disassemble (frame):	Mostra os memory addresses (0x000...), mostra os bytes of memory
-			(<+0>, <+5>) que são necessários, e mostra as instruções que fizeste.
-			Provavelmente chamaste um rax, mas aparece eax. É normal, porque
-			o assembler tenta optimizar sempre.
+			Use "disassemble _start" or whatever frame you want to check.
 
-			Usa "disassemble _start". Porque tens que indicar o frame.
-
-help x:		O x quer dizer "examine".
+help x:			X means "Examine".
 			Examine memory: x/FMT ADDRESS.
+						
 			ADDRESS is an expression for the memory address to examine.
 			FMT is a repeat count followed by a format letter and a size letter.
 			Format letters are o(octal), x(hex), d(decimal), u(unsigned decimal),
@@ -367,31 +424,32 @@ help x:		O x quer dizer "examine".
   		and z(hex, zero padded on the left).
 			Size letters are b(byte), h(halfword), w(word), g(giant, 8 bytes).
 
-	Depois de fazeres o "disassemble _start", podes tirar informações com o x/FTM ADDRESS
-	de memória em particular.
+	After you do "disassemble _start", you can take informations with x/FTM ADDRESS on particular
+	pieces of memory.
 
-	Exemplo:
-		Tu sabes que o texto "Hello, World!!!!!" está no movabs. E sabes que é uma string.
-		Tens que meter um 0 no fim do "Hello, World!!!" porque se não dá erro. Porque o
-		x/s vê a string toda até encontrar um NULL. Se não encontrar continua a ler sem parar.
+	Example:
+		You know that "Hello, World!!!!" is on movabs. You know it is a string and you have
+		to put a '\0' in the end of "Hello, World!!!!" because otherwise it gives an error.
+		x/s sees the entire string until it finds a NULL. That's why you end strings with '\0'.
+		
 			text db "Hello, World!!!!!",10,0
 
-		Com NULL terminated:
+		With NULL terminated:
 			"x/s 0x402000"
 				0x402000 <text>:		"Hello, World!!!!!\n"
-		Sem NULL terminated:
+		Without NULL terminated:
 			"x/s 0x402000"
 				0x402000 <text>:		"Hello, World!!!!!\n"<error: Cannot access
 										 memory at address 0x402012>
-		Podes fazer também:
+		You can also:
 			"x/s &text"
 				0x402000 <text>:		"Hello, World!!!!!\n"
 
-		Para ver o primeiro caracter e o código de ASCII.
+		To see the first caracther and the ASCII code:
 			"x/c 0x402000"
 				0x402000 <text>:		72 'H'
 
-		Para veres os characteres todos.
+		To see all the characters:
 			"x/18c 0x402000"
 				0x402000 <text>:	72 'H'  101 'e' 108 'l' 108 'l' 111 'o' 44 ','  32 ' '  87 'W'
 				0x402008:			111 'o' 114 'r' 108 'l' 100 'd' 33 '!'  33 '!'  33 '!'  33 '!'
@@ -404,40 +462,42 @@ break or b:		Set a breakpoint as we have done before.
 disable breakpoint (number)
 enable breakpoint (number)
 delete breakpoint (number)
-continue or c:	Continue execution until next breakpoint.
+
+continue or c:		Continue execution until next breakpoint.
 step or s:		Step into the current line, eventually jumping into the called
 				function.
 next or n:		Step over the current line and stop at the next line.
 help or h:		Show help.
 tui enable:		Enable a simple text user interface; to disable, use tui disable.
 print or p:		Print the value of a variable, register, and so on.
+
 ------------------------------------------------------------------------------------
 
-DDD (Debugger com GUI):
+DDD (Debugger with GUI):
 
-	Corres "ddd a.out". Não esquecer que precisas de o -g e do dwarf.
-	Aquilo abre a janela.
+	Run "ddd a.out". Don't forget you need -g and dwarf.
+	It opens a windows.
 
-	Status -> Registers é útil ter isto aberto.
-	Metes o breakpoint, tenta pôr no "main" ou "_start" conforme o main que usas.
-
-	Para o GDB correr e não fechar logo, pelo menos em assembly precisas de pôr o
-	function prologue e o function epilogue.
+	Status -> Registers is useful to have it open.
+	Put a breakpoint, try to put it on the start function. "main", "_start" whatever it is.
+	
+	This is important. To run the debbuger, you need to have the Function Prologue and
+	the Function Epilogue. Otherwise it won't stop.
 
 	main:
 		push rbp		; function prologue
 		mov rbp,rsp		; function prologue
-		; código aqui
-		; código aqui
+		; code here
+		; code here
 		mov rsp,rbp		; function epilogue
 		pop rbp			; function epilogue
-		ret				; fim do código. Também pode ser o rax 60 rdi 0 syscall.
-						; este é uma alternativa mais facil. É a diferença de um
-						; return(0) ou exit(0) em C.
+		ret			; End of code. It could also be rax 60 rdi 0 syscall.
+					; This is an easier alternative. It's the difference between
+					; a return or exit(0) in C.
 
-	Depois é só correr (run) com o Command Tools (Já deves ter aberto View -> Command Tools).
-	E usar Step.
-
+	Then you just press (run) in the Command Tools (You probably have it open already. If not
+	it's View -> Command Tools).
+	Then use Step.
 
 ------------------------------------------------------------------------------------
 
@@ -465,8 +525,17 @@ https://www.youtube.com/watch?v=8rncBCVySEw
 
 
 nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst 	(dwarf é o debug format)
-gcc -o a.out ft_strlen.o -no-pie				(-no-pie é para as funções externas funcionarem)
+gcc -o a.out ft_strlen.o -no-pie			(-no-pie é para as funções externas funcionarem)
 ./a.out
 
 
 </pre>
+
+
+**** Testers ****
+
+[libasm_test](https://github.com/cacharle/libasm_test)
+
+**** Results ****
+
+![GitHub Logo](/extras/images/image1.png)
