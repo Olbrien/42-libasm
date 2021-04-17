@@ -18,7 +18,8 @@ ft_write:
 				; here in Linux.
 
 		cmp rax, 0	; In Linux the value goes from minus to plus. In Mac it adds a Carry
-				; Flag.
+				; Flag. On MAC you will get a (9) with a Carry Flag. Therefor you don't need
+				; this cmp, and the jl _error bellow it's a jc _error.
 				; https://docs.freebsd.org/en_US.ISO8859-1/books/developers-handbook/x86-return-values.html
 		jl _error	; If its < 0, jump to error.
 		jmp _return	; Else, return with the value returned from "Write" syscall.
@@ -35,6 +36,8 @@ _error:
 					; directory */ etc...
 					; You need to put your -9 positive to correspond to a value in
 					; /sys/errno.h
+					; If you are on a MAC you don't need this neg r8, because the value
+					; is positive, on Linux it's a (-9) on MAC it's a (9).
 
 		mov [rax], r8	; You want to change the Address of [RAX].
 				; The address is where you're going to set your '9' for
