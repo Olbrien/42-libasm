@@ -1,0 +1,27 @@
+NAME =		libasm.a
+
+SRC =		./ft_strlen.s \
+			./ft_strcpy.s \
+			./ft_strcmp.s \
+			./ft_write.s \
+			./ft_read.s \
+			./ft_strdup.s
+
+OBJ =		$(SRC:%.s=%.o)
+
+%.o: %.s
+	@nasm -f macho64 -g -F dwarf $<
+
+all:		$(NAME)
+
+$(NAME): $(OBJ)
+	@ar -rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+
+clean:
+	@rm -f $(OBJ)
+
+fclean:	clean
+	@rm -f $(NAME)
+
+re:	fclean all
