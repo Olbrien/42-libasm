@@ -1,11 +1,11 @@
 section .data
 section .bss
 section .text
-		global ft_strdup
-		extern ft_strlen
-		extern ft_strcpy
-		extern malloc
-ft_strdup:
+		global _ft_strdup
+		extern _ft_strlen
+		extern _ft_strcpy
+		extern _malloc
+_ft_strdup:
 		push rbp
 		mov rbp,rsp
 
@@ -19,14 +19,14 @@ _checkEmptyStr:
 		jz _return
 		ret
 _getLen:
-		call ft_strlen
+		call _ft_strlen
 		inc rax
 		ret
 _doMalloc:
 		mov r8, rdi
 		push r8
 		mov rdi, rax
-		call malloc
+		call _malloc
 		pop r8
 		cmp rax, 0
 		jz _error
@@ -34,7 +34,7 @@ _doMalloc:
 _doStrCpy:
 		mov rsi, r8
 		mov rdi, rax
-		call ft_strcpy
+		call _ft_strcpy
 		jmp _return
 _error:
 		mov rsp,rbp

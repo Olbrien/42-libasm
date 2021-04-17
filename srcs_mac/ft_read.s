@@ -2,21 +2,19 @@ extern ___error
 section .data
 section .bss
 section .text
-		global ft_read
-ft_read:
+		global _ft_read
+_ft_read:
 		push rbp
 		mov rbp,rsp
 
 		mov rax, 0x02000003
 		syscall
-
-		cmp rax, 0
+		
 		jc _error
 		jmp _return
 _error:
 		mov r8, rax
-		call ___error
-		neg r8
+		call ___error		
 		mov [rax], r8
 		mov rax, -1
 		jmp _return

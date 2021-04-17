@@ -27,7 +27,7 @@ then
 	cp ../main/texto1.txt .
 	cp ../main/texto2.txt .
 	echo "Step 5: Compiling main.c with libasm.a to form an executable file."
-	gcc -Wall -Wextra -Werror main.c libasm.a -o mac_normal -no-pie
+	gcc -Wall -Wextra -Werror main.c libasm.a -o mac_normal
 	echo "Step 6: Running the executable file called mac_normal."
 	./mac_normal
 elif [[ "$INDEX" == "debugger" ]];

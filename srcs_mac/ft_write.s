@@ -2,21 +2,19 @@ extern ___error
 section .data
 section .bss
 section .text
-		global ft_write
-ft_write:
+		global _ft_write
+_ft_write:
 		push rbp
 		mov rbp,rsp
 
 		mov rax, 0x2000004
 		syscall
-
-		cmp rax, 0
-		jl _error
+		
+		jc _error
 		jmp _return
 _error:
 		mov r8, rax
-		call ___error
-		neg r8
+		call ___error		
 		mov [rax], r8
 		mov rax, -1
 		jmp _return
