@@ -20,7 +20,7 @@ _checkEmptyStr:
 		ret
 _getLen:
 		call ft_strlen	; Take the strlen.
-		inc rax	; You need to take in account the '\0'. If you copy "Alo", which is 3 of len,
+		inc rax		; You need to take in account the '\0'. If you copy "Alo", which is 3 of len,
 				; you also need the '\0' that the strlen doesn't count. So you increase RAX.
 		ret
 _doMalloc:
@@ -31,19 +31,19 @@ _doMalloc:
 				; to do push / pop on R8. Well, for some reason, the call to malloc
 				; messes with almost every register. So that's why we save it in the
 				; stack and after malloc you retrieve it.
-		mov rdi, rax ; Put the stlren (which was 4 if you were following along) on RDI.
-					 ; void *malloc(size_t size)
+		mov rdi, rax    ; Put the stlren (which was 4 if you were following along) on RDI.
+				; void *malloc(size_t size)
 		call malloc
 		pop r8		; Retrieve the value you had prior on R8 (which was the string *s).
-					; Also you need to pop what you pushed here. If you save it, and
-					; try to pop it in another function besides _doMalloc it will
-					; give a segmentation fault.
+				; Also you need to pop what you pushed here. If you save it, and
+				; try to pop it in another function besides _doMalloc it will
+				; give a segmentation fault.
 		cmp rax, 0	; If Malloc has an error, you go go to _error.
 		jz _error
 		ret
 _doStrCpy:
 		mov rsi, r8	; You get the string *s from R8 to RSI. (Let's assume it's still "Alo");
-		mov rdi, rax ; You put the value you got from Malloc on RDI.
+		mov rdi, rax    ; You put the value you got from Malloc on RDI.
 		call ft_strcpy	; *ft_strcpy(RDI, RSI) or ft_strcpy(allocated memory, "Alo").
 		jmp _return
 _error:
