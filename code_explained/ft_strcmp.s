@@ -14,14 +14,14 @@ ft_strcmp:
 		jmp _compare
 _compare:
 		mov cl, BYTE[rdi + r8] ; cl has the char of [RDI + R8].
-							   ; If RDI has "Hello", [RDI + 0] = "H". cl = "H" or 72 in decimal.
+				       ; If RDI has "Hello", [RDI + 0] = "H". cl = "H" or 72 in decimal.
 		mov dl, BYTE[rsi + r8] ; dl has the char of [RSI + R8];
-							   ; If RSI has "Bye", [RSI + 0] = "B". cl = "B" or 66 in decimal.
+				       ; If RSI has "Bye", [RSI + 0] = "B". cl = "B" or 66 in decimal.
 		call _addToRAX
 
 		cmp rax, 0	; If "H" != "B", it's not equal, therefor we don't need to loop anymore.
-					; If it was equal let's say "H" == "H", then we wanted to loop to the next
-					; char.
+				; If it was equal let's say "H" == "H", then we wanted to loop to the next
+				; char.
 		jnz _return
 		cmp cl, 0	; If s1 has ended. (Encountered a '\0').
 		jz _return
@@ -35,13 +35,13 @@ _compare:
 		jmp _compare ; Loop.
 _addToRAX:
 		push rcx		; This saves RCX in the stack. Because I'm going to use it and I
-						; want to retrieve it.
+					; want to retrieve it.
 		sub rcx, rdx	; This is RCX = RCX(cl) - RDX(dl). If we're following the example
-						; above it's RCX = 72 - 66 which is 6.
+				; above it's RCX = 72 - 66 which is 6.
 		add rax, rcx	; RAX now has 6.
-		pop rcx			; Since we used "sub RCX, RDX", RCX changed it's value from 72 to
-						; 6. But we stored the value 72 in the stack. So we retrieve it
-						; with pop. Now RCX has 72 again.
+		pop rcx		; Since we used "sub RCX, RDX", RCX changed it's value from 72 to
+				; 6. But we stored the value 72 in the stack. So we retrieve it
+				; with pop. Now RCX has 72 again.
 
 		ret
 _return:
