@@ -21,43 +21,50 @@ You need to have DDD and NASM installed.
 
 ![GitHub Logo](/extras/images/image2.png)
 
+**** Testers ****
+
+[libasm_test](https://github.com/cacharle/libasm_test)
+
+**** Results ****
+
+![GitHub Logo](/extras/images/image1.png)
+
 **** Info ****
 
 Assembly is a pretty difficult language to grasp. It will take you a few days to start to make sense to you.
 
-I've watched a few youtube videos but what really started to click to me was a .PDF called 
+I've watched a few youtube videos but what really started to click to me was a .PDF called\
 "Beginning x64 Assembly Programming From Novice to AVX Professional".
 
-You can find this .PDF online. It has 458 pages but don't worry.
-For this project you only need to read to the page 112. 
+You can find this .PDF online. It has 458 pages but don't worry.\
+For this project you only need to read to the page 112. \
 This .PDF explains everything better than any video on youtube. It has many examples.
 
-I explain everything I did in detail on the folder "code_explained". 
-Make you sure you follow along with the order of the subject.
-ft_strlen (man 3 strlen)
-ft_strcpy (man 3 strcpy)
-ft_strcmp (man 3 strcmp)
-ft_write (man 2 write)
-ft_read (man 2 read)
+I explain everything I did in detail on the folder "code_explained". \
+Make you sure you follow along with the order of the subject.\
+ft_strlen (man 3 strlen)\
+ft_strcpy (man 3 strcpy)\
+ft_strcmp (man 3 strcmp)\
+ft_write (man 2 write)\
+ft_read (man 2 read)\
 ft_strdup (man 3 strdup)
 
-One thing really important, and if you're reading the .PDF, don't ignore the DDD section.
-Using DDD makes you visually see what you are really doing. And that was what made it click for me.
+One thing really important, and if you're reading the .PDF, don't ignore the DDD section.\
+Using DDD makes you visually see what you are really doing. And that was what made it click for me.\
 Really simple to use and very useful.
 
 Here are some useful links:
 
-[Linux System Call Table for x86_64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
+[Linux System Call Table for x86_64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)\
 [macOS System Call Table for x86_64](https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master/)
 
 [Registers](https://miro.medium.com/max/575/1*4ipwUzIWd4eqUvcEmZ5tMQ.png)
 
-[errno return values](https://docs.freebsd.org/en_US.ISO8859-1/books/developers-handbook/x86-return-values.html)
-[errno Linux](https://cpip.readthedocs.io/en/latest/_static/dictobject.c/errno.h_85b9b44751f37eef65e30f1b57e3f0fb.html)
+[errno return values](https://docs.freebsd.org/en_US.ISO8859-1/books/developers-handbook/x86-return-values.html)\
+[errno Linux](https://cpip.readthedocs.io/en/latest/_static/dictobject.c/errno.h_85b9b44751f37eef65e30f1b57e3f0fb.html)\
 [errno macOS](https://unix.superglobalmegacorp.com/Net2/newsrc/sys/errno.h.html)
 
 Here are some useful stuff I picked up:
-
 <pre>
 ------------------------------------------------------------------------------------
 			nasm -f elf64 -g hello.asm && ld hello.o && ./a.out
@@ -525,12 +532,3 @@ nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst 	(dwarf is the format to 
 gcc -o a.out ft_strlen.o -no-pie			(-no-pie is needed for external functions)
 ./a.out
 </pre>
-
-
-**** Testers ****
-
-[libasm_test](https://github.com/cacharle/libasm_test)
-
-**** Results ****
-
-![GitHub Logo](/extras/images/image1.png)
