@@ -505,30 +505,25 @@ DDD (Debugger with GUI):
 
 	je		ZF=1 				Jump if equal 			Signed, unsigned
 	jne		ZF=0 				Jump if not equal 		Signed, unsigned
-	jg 		((SF XOR OF) OR ZF) = 0	Jump if greater 		Signed
+	jg 		((SF XOR OF) OR ZF) = 0		Jump if greater 		Signed
 	jge 		(SF XOR OF) = 0 		Jump if greater or equal 	Signed
 	jl 		(SF XOR OF) = 1 		Jump if lower			Signed
-	jle 		(SF XOR OF) OR ZF) = 1 	Jump if lower or equal		Signed
-	ja 		(CF OR ZF) = 0 		Jump if above			Unsigned
-	jae 		CF=0 				Jump if above or equal 	Unsigned
-	jb 		CF=1 				Jump if lesser 		Unsigned
-	jbe 		(CF OR ZF) = 1 		Jump if lesser or equal 	Unsigned
+	jle 		(SF XOR OF) OR ZF) = 1 		Jump if lower or equal		Signed
+	ja 		(CF OR ZF) = 0 			Jump if above			Unsigned
+	jae 		CF=0 				Jump if above or equal 		Unsigned
+	jb 		CF=1 				Jump if lesser 			Unsigned
+	jbe 		(CF OR ZF) = 1	 		Jump if lesser or equal 	Unsigned
 ------------------------------------------------------------------------------------
 
 Useful Stuff:
 
-	time .a.out - Mostra o tempo que demora o código. É útil.
+	time .a.out - Shows the time the code takes to run.
 
 ------------------------------------------------------------------------------------
 
-https://www.youtube.com/watch?v=8rncBCVySEw
-
-
-nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst 	(dwarf é o debug format)
-gcc -o a.out ft_strlen.o -no-pie			(-no-pie é para as funções externas funcionarem)
+nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst 	(dwarf is the format to debug)
+gcc -o a.out ft_strlen.o -no-pie			(-no-pie is needed for external functions)
 ./a.out
-
-
 </pre>
 
 
