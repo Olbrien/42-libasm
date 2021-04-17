@@ -34,8 +34,8 @@ _compare:
 
 		jmp _compare ; Loop.
 _addToRAX:
-		push rcx		; This saves RCX in the stack. Because I'm going to use it and I
-					; want to retrieve it.
+		push rcx	; This saves RCX in the stack. Because I'm going to use it and I
+				; want to retrieve it.
 		sub rcx, rdx	; This is RCX = RCX(cl) - RDX(dl). If we're following the example
 				; above it's RCX = 72 - 66 which is 6.
 		add rax, rcx	; RAX now has 6.
