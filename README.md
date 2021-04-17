@@ -41,7 +41,7 @@ For this project you only need to read to the page 112. \
 This .PDF explains everything better than any video on youtube. It has many examples.
 
 I explain everything I did in detail on the folder "code_explained". \
-Make you sure you follow along with the order of the subject.\
+Make sure you follow along with the order of the subject.\
 ft_strlen (man 3 strlen)\
 ft_strcpy (man 3 strcpy)\
 ft_strcmp (man 3 strcmp)\
