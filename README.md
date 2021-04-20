@@ -528,6 +528,24 @@ Useful Stuff:
 
 ------------------------------------------------------------------------------------
 
+int main()
+{
+
+	int *teste;
+
+	printf("%d ", errno);
+	printf("%s ", strerror(errno));
+	
+	teste = &errno;
+
+	*teste = 5;
+
+	printf("\n%d ", errno);
+	printf("%s\n", strerror(errno));
+}
+
+------------------------------------------------------------------------------------
+
 nasm -f elf64 -g -F dwarf ft_strlen.s -l ft_strlen.lst 	(dwarf is the format to debug)
 gcc -o a.out ft_strlen.o -no-pie			(-no-pie is needed for external functions)
 ./a.out
