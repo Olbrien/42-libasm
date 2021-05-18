@@ -1,6 +1,11 @@
 # ft_libasm
 
-###### <i>Recent Update on 17/04/2021.</i>
+![GitHub Logo](/extras/images/Success.png)
+
+###### <i>Recent Update on 29/04/2021.</i>
+Got evaluated.
+
+###### <i>Old Update on 17/04/2021.</i>
 Finished the project.\
 Waiting to be evaluated.
 
