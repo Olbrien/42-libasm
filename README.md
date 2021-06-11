@@ -1,40 +1,32 @@
-# ft_libasm
-
 ![GitHub Logo](/extras/images/Success.png)
 
 ###### <i>Recent Update on 29/04/2021.</i>
-Got evaluated.
+• Got evaluated.
 
 ###### <i>Old Update on 17/04/2021.</i>
-Finished the project.\
-Waiting to be evaluated.
+• Finished the project.\
+• Waiting to be evaluated.
 
 ###### <i>Old Update on 07/04/2021.</i>
-Started the project.
+• Started the project.
 
-**** Run This Project ****
+## Subject:
 
-<pre>
-First download the repository. 
-
-On the root of the folder depending in what machine you are type
-`bash linux.sh`
-`bash mac.sh`
-
-You need to have DDD and NASM installed.
-</pre>
+You can find the subject of this project [here.](https://github.com/Olbrien/42Lisboa-lvl_3_libasm/blob/main/extras/lvl_3_libasm.pdf)
 
 ![GitHub Logo](/extras/images/image2.png)
 
-**** Testers ****
+## How to run:
 
-[libasm_test](https://github.com/cacharle/libasm_test)
+First download the repository. 
 
-**** Results ****
+On the root of the folder depending in what machine you are type\
+`bash linux.sh`\
+`bash mac.sh`
 
-![GitHub Logo](/extras/images/image1.png)
+You need to have DDD and NASM installed.
 
-**** Info ****
+## Info
 
 Assembly is a pretty difficult language to grasp. It will take you a few days to start to make sense to you.
 
@@ -58,7 +50,7 @@ One thing really important, and if you're reading the .PDF, don't ignore the DDD
 Using DDD makes you visually see what you are really doing. And that was what made it click for me.\
 Really simple to use and very useful.
 
-Here are some useful links:
+#### Here are some useful links:
 
 [Linux System Call Table for x86_64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)\
 [macOS System Call Table for x86_64](https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master/)
@@ -69,7 +61,16 @@ Here are some useful links:
 [errno Linux](https://cpip.readthedocs.io/en/latest/_static/dictobject.c/errno.h_85b9b44751f37eef65e30f1b57e3f0fb.html)\
 [errno macOS](https://unix.superglobalmegacorp.com/Net2/newsrc/sys/errno.h.html)
 
-Here are some useful stuff I picked up:
+## Testers
+
+[libasm_test](https://github.com/cacharle/libasm_test)
+
+## Results
+
+![GitHub Logo](/extras/images/image1.png)
+
+## Research
+
 <pre>
 ------------------------------------------------------------------------------------
 			nasm -f elf64 -g hello.asm && ld hello.o && ./a.out
