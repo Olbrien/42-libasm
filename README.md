@@ -25,7 +25,7 @@ On the root of the folder depending in what machine you are type\
 
 You need to have DDD and NASM installed.
 
-## Info
+## Info:
 
 Assembly is a pretty difficult language to grasp. It will take you a few days to start to make sense to you.
 
@@ -60,15 +60,15 @@ Really simple to use and very useful.
 [errno Linux](https://cpip.readthedocs.io/en/latest/_static/dictobject.c/errno.h_85b9b44751f37eef65e30f1b57e3f0fb.html)\
 [errno macOS](https://unix.superglobalmegacorp.com/Net2/newsrc/sys/errno.h.html)
 
-## Testers
+## Testers:
 
 [libasm_test](https://github.com/cacharle/libasm_test)
 
-## Results
+## Results:
 
 ![GitHub Logo](/extras/images/image1.png)
 
-## Research
+## Research:
 
 <pre>
 ------------------------------------------------------------------------------------
